@@ -1,0 +1,8 @@
+select count(actor.actor_id) as rental_number, actor.first_name||' '|| actor.last_name as actor_name
+from actor, film_actor, film, inventory, rental
+where actor.actor_id = film_actor.actor_id 
+	and film_actor.film_id = film.film_id
+	and film.film_id = inventory.film_id
+	and rental.inventory_id = inventory.inventory_id
+group by actor.actor_id
+order by 1 desc

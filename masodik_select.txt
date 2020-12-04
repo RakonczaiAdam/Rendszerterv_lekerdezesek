@@ -1,0 +1,10 @@
+select sum(payment.amount) as category_amount, category.name
+from category, film_category, film, inventory, rental, payment
+where category.category_id = film_category.category_id
+	and film_category.film_id = film.film_id
+	and film.film_id = inventory.film_id
+	and rental.inventory_id = inventory.inventory_id
+	and payment.rental_id = rental.rental_id
+group by category.name
+order by 1 desc
+limit 3
